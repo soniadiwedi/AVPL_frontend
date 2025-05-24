@@ -12,7 +12,10 @@ const SingleUserPage = () => {
   const { dataGet, loading, error, fetchData } = useGetQuery(
     `${baseUrl}/api/asset-requests`
   );
-
+  const { dataGet:data } = useGetQuery(
+    `${baseUrl}/api/asset-requests/user/${user?._id}`
+  );
+  console.log("data",data)
   const openModal = (user) => {
     setSelectedItem(user);
     setIsModalOpen(true);
@@ -33,7 +36,7 @@ const SingleUserPage = () => {
 
           <button
             onClick={() => openModal(user)}
-            className="bg-blue-600 hover:bg-blue-700 text-white text-sm lg:text-base px-3 lg:px-5 py-2 rounded-md font-medium transition"
+            className="bg-purpuleLight hover:bg-primary text-white text-sm lg:text-base px-3 lg:px-5 py-2 rounded-md font-medium transition"
           >
             + Send Asset Request
           </button>

@@ -2,13 +2,18 @@ import React, { useState } from "react";
 import { baseUrl } from "../../utils/data";
 import EditAssetsModal from "../modal/EditAssetsModal";
 import AssignAssetModal from "../modal/AssignAssetModal";
-import { Pencil } from "lucide-react";
-
+import RequestRepairModal from "../modal/RequestRepairModal";
 
 const AssetTable = ({ assets, fetchData, showAssignAssets }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isAssignModalOpen, setIsAssignModalOpen] = useState(false); // State for Assign modal
   const [selectedAsset, setSelectedAsset] = useState(null);
+  const [isRepairModalOpen, setIsRepairModalOpen] = useState(false);
+
+  const handleRequestRepairClick = (asset) => {
+    setSelectedAsset(asset);
+    setIsRepairModalOpen(true);
+  };
 
   // Handle Edit button click
   const handleEditClick = (asset) => {
@@ -51,11 +56,11 @@ const AssetTable = ({ assets, fetchData, showAssignAssets }) => {
             <th className="px-3 sm:px-4 md:px-5 py-2 sm:py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
               Location
             </th>
-           
+
             <th className="px-3 sm:px-4 md:px-5 py-2 sm:py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
               Cost
             </th>
-             <th className="px-3 sm:px-4 md:px-5 py-2 sm:py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+            <th className="px-3 sm:px-4 md:px-5 py-2 sm:py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
               Purchase Date
             </th>
             <th className="px-3 sm:px-4 md:px-5 py-2 sm:py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
@@ -90,12 +95,11 @@ const AssetTable = ({ assets, fetchData, showAssignAssets }) => {
               <td className="px-3 sm:px-4 md:px-5 py-2 sm:py-3 border-b border-gray-200 text-sm">
                 <p className="text-gray-900">{asset.location}</p>
               </td>
-              
-             
+
               <td className="px-3 sm:px-4 md:px-5 py-2 sm:py-3 border-b border-gray-200 text-sm">
                 ₹{asset.purchaseCost}
               </td>
-               <td className="px-3 sm:px-4 md:px-5 py-2 sm:py-3 border-b border-gray-200 text-sm">
+              <td className="px-3 sm:px-4 md:px-5 py-2 sm:py-3 border-b border-gray-200 text-sm">
                 <p className="text-gray-900">
                   {new Date(asset.purchaseDate).toLocaleDateString()}
                 </p>
@@ -103,7 +107,7 @@ const AssetTable = ({ assets, fetchData, showAssignAssets }) => {
               <td className="px-3 sm:px-4 md:px-5 py-2 sm:py-3 border-b border-gray-200 text-sm">
                 {new Date(asset.warrantyExpiryDate).toLocaleDateString()}
               </td>
-               <td className="px-3 sm:px-4 md:px-5 py-2 sm:py-3 border-b border-gray-200 text-sm">
+              <td className="px-3 sm:px-4 md:px-5 py-2 sm:py-3 border-b border-gray-200 text-sm">
                 <div className="flex items-center">
                   <img
                     src={`${asset.assetQR}`}
@@ -117,7 +121,7 @@ const AssetTable = ({ assets, fetchData, showAssignAssets }) => {
                   className="bg-outline-button text-blue-600 hover:text-blue-800 border border-gray-300 rounded-md px-2 py-1 text-xs sm:text-sm"
                   onClick={() => handleEditClick(asset)}
                 >
-                 <Pencil size={20}  />
+                  Edit
                 </button>
 
                 {showAssignAssets && (
@@ -128,6 +132,9 @@ const AssetTable = ({ assets, fetchData, showAssignAssets }) => {
                     Assign
                   </button>
                 )}
+                <button className="bg-outline-button text-blue-600 hover:text-blue-800 border border-gray-300 rounded-md px-2 py-1 text-xs sm:text-sm" onClick={() => handleRequestRepairClick(asset)}>
+                  Request for Repair
+                </button>
 
                 {/* <button className="bg-destructive-button text-red-600 hover:text-red-800 border border-gray-300 rounded-md px-2 py-1 text-xs sm:text-sm">
                   Delete
@@ -150,8 +157,15 @@ const AssetTable = ({ assets, fetchData, showAssignAssets }) => {
       {/* Assign Modal */}
       {isAssignModalOpen && selectedAsset && (
         <AssignAssetModal
-          asset={selectedAsset} 
-          onClose={handleCloseAssignModal} 
+          asset={selectedAsset}
+          onClose={handleCloseAssignModal}
+        />
+      )}
+      {isRepairModalOpen && selectedAsset && (
+        <RequestRepairModal
+          asset={selectedAsset}
+          onClose={() => setIsRepairModalOpen(false)}
+         
         />
       )}
     </div>

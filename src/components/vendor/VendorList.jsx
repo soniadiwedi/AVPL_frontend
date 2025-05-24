@@ -118,16 +118,6 @@ const VendorListAdminTable = ({ vendors,fetchData }) => {
       Manage Assets
     </button>
 
-    {/* New Assets Enquiry Button */}
-    <button
-      className="text-blue-600 hover:text-blue-900 border p-2 rounded-md border-blue-500 transition-all duration-300 ease-in-out transform hover:scale-105"
-      onClick={() => {
-        setSelectedVendor(vendor);
-        setShowModal(true);
-      }}
-    >
-      New Assets Enquiry
-    </button>
   </div>
 </td>
 
@@ -138,15 +128,6 @@ const VendorListAdminTable = ({ vendors,fetchData }) => {
         </div>
       )}
 
-      {showModal && selectedVendor && (
-        <NewAssetEnquiryModal
-          vendor={selectedVendor}
-          onClose={() => {
-            setShowModal(false);
-            setSelectedVendor(null);
-          }}
-        />
-      )}
 
     {showEditModal && selectedVendor && (
   <CreateVendor

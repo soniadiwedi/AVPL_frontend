@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-
 import LoginPage from "./pages/Auth/LoginPage";
 import SignupPage from "./pages/Auth/SignupPage";
 import UserPage from "./pages/UserPage";
@@ -14,9 +13,13 @@ import DashboardLayout from "./components/DashboardLayout";
 import { AuthProvider } from "./components/context/AuthContext";
 import SingleUserPage from "./pages/user/SingleUserpage";
 import ProcurementRequest from "./pages/user/ProcurementRequest";
-import AttendancePage from "./pages/user/AttendancePage";
 import TravelPage from "./pages/user/TravelPage";
 import TicketPage from "./pages/user/TicketPage";
+import Procurement from "./components/table/Procurement";
+import RepairRequestList from "./pages/RepairRequestList";
+import MarkAttendanceForm from "./pages/user/MarkAttendanceForm";
+import AttendanceTracker from "./pages/AttendanceTracker";
+import ReimbursementRequests from "./pages/ReimbursementRequests";
 
 function App() {
   return (
@@ -35,7 +38,7 @@ function App() {
             >
               <Route path="/user/assets" element={<SingleUserPage />} />
               <Route path="/user/procurement" element={<ProcurementRequest />} />
-              <Route path="/user/s" element={<AttendancePage />} />
+              <Route path="/user/attendance" element={<MarkAttendanceForm />} />
               <Route path="/user/travel" element={<TravelPage />} />
               <Route path="/user/ticket" element={<TicketPage />} />
             </Route>
@@ -53,6 +56,11 @@ function App() {
               <Route path="/asset-requests" element={<AllRequestPage />} />
               <Route path="/procurement" element={<ProcurementPage />} />
               <Route path="/vendor" element={<VendorPage />} />
+              <Route path="/new-inquiry" element={<Procurement />} />
+              <Route path="/repair-request" element={<RepairRequestList />} />
+              <Route path="/facility" element={<FacilityPage />} />
+              <Route path="/track-attendance" element={<AttendanceTracker />} />
+              <Route path="/reimburstment-request" element={<ReimbursementRequests />} />
             </Route>
           </Route>
         </Routes>

@@ -8,11 +8,8 @@ import { useNavigate, useLocation, matchPath } from "react-router-dom";
 const AssestPage = () => {
   const [showModal, setShowModal] = useState(false);
   const { dataGet, loading, error, fetchData } = useGetQuery(`${baseUrl}/api/assets`);
-  
   const navigate = useNavigate();
   const location = useLocation();
-
-  // Check if the pathname matches /assets/:id pattern
   const showCreateAssetButton = matchPath("/assets/:id", location.pathname);
   const showAssignAssets=matchPath("/assets-assign/:userId/:requestId", location.pathname);
 
@@ -21,13 +18,12 @@ const AssestPage = () => {
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Asset Management</h1>
         <button
-          className="bg-secondary text-white px-4 py-2 rounded hover:bg-yellow-600 font-semibold"
+          className="bg-purpuleLight text-white px-4 py-2 rounded hover:bg-primary font-semibold"
           onClick={() => navigate("/asset-requests")}
         >
            All Assest Requests by user
         </button>
         
-        {/* Only show the "Create Asset" button if the condition is met */}
         {showCreateAssetButton && (
           <button
             className="bg-secondary text-white px-4 py-2 rounded hover:bg-yellow-600 font-semibold"

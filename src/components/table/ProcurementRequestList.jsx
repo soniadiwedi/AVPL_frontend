@@ -2,7 +2,8 @@ import { Pencil } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { baseUrl } from "../../utils/data";
-import NewAssetEnquiryModal from "../vendor/NewAssetEnquiryModal";
+import InquiryToVendor from "../modal/InquiryToVendor";
+
 
 const ProcurementRequestList = ({ data, fetchData }) => {
   const [loading, setLoading] = useState(false); // For loading state
@@ -133,7 +134,7 @@ const ProcurementRequestList = ({ data, fetchData }) => {
         </tbody>
       </table>
    {showModal && selectedAsset && (
-  <NewAssetEnquiryModal
+  <InquiryToVendor
     asset={selectedAsset}
     onClose={() => {
       setShowModal(false);

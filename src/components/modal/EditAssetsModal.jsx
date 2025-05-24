@@ -6,7 +6,6 @@ import SelectField from "../form/SelectField";
 
 const EditAssetsModal = ({ onClose, fetchData, asset }) => {
   const { updateData, loading, error } = usePatch(`${baseUrl}/api/assets/edit/${asset._id}`);
-  console.log("asset",asset._id)
   const [formData, setFormData] = useState({
     assetName: "",
     assetType: "",
